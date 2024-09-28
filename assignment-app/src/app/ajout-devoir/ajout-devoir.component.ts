@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { AssignmentsComponent } from "./assignments/assignments.component";
-import {MatButton} from "@angular/material/button";
+import { AssignmentsComponent } from '../assignments/assignments.component';
 
+import { RouterOutlet } from '@angular/router';
+import {MatButton} from "@angular/material/button";
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -13,25 +13,23 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 
-
-
 @Component({
-  selector: 'app-root',
+  selector: 'app-ajout-devoir',
   standalone: true,
   imports: [RouterOutlet,
-     AssignmentsComponent,
-      MatButton,
-      MatFormFieldModule,
-      MatToolbarModule,
-      MatIconModule,
-      MatSidenavModule,
-      MatListModule,
-      RouterModule,
+    AssignmentsComponent,
+     MatButton,
+     MatFormFieldModule,
+     MatToolbarModule,
+     MatIconModule,
+     MatSidenavModule,
+     MatListModule,
+     RouterModule,
     ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  templateUrl: './ajout-devoir.component.html',
+  styleUrl: './ajout-devoir.component.css'
 })
-export class AppComponent {
+export class AjoutDevoirComponent {
   title = 'assignment-app';
   opened = false; 
 }

@@ -1,0 +1,28 @@
+.mat-toolbar {
+    background-color: steelblue;
+  }
+  
+.mat-sidenav-container{
+    height: calc(205vh - 115vh);
+}
+
+.mat-sidenav{
+    width: 300px;
+    background-color: #eee;
+    
+}
+
+.space {
+    flex: 1 1 auto;
+  } 
+
+
+
+  .alignement {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  
+
+  
