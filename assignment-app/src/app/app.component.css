@@ -1,28 +1,44 @@
-.mat-toolbar {
-    background-color: steelblue;
-  }
-  
-.mat-sidenav-container{
-    height: calc(205vh - 115vh);
+mat-toolbar {
+  background-color:rgba(90, 145, 184, 0.823);
+  color: white;
 }
 
-.mat-sidenav{
-    width: 300px;
-    background-color: #eee;
-    
+mat-sidenav-container {
+  height: calc(100vh - 120px);
 }
 
-.space {
-    flex: 1 1 auto;
-  } 
+mat-sidenav{
+  width: 250px;
+  background-color: rgba(211, 214, 212, 0.823);
+}
 
+/*.example-spacer {*/
+/*  flex: 1 1 auto;*/
+/*  color: white;*/
+/*}*/
 
+.example-icon {
+  color: white;
+}
 
-  .alignement {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-  }
-  
+.align-middle {
+  vertical-align: middle;
+}
 
-  
+.toolbar-style {
+  display: flex;
+  justify-content: space-between;
+}
+
+.toolbar-link {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  text-underline: none !important;
+}
+

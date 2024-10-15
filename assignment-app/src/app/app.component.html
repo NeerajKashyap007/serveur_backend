@@ -1,49 +1,43 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <button mat-button style="color: white;" (click)="opened=!opened"> <mat-icon>menu</mat-icon>Menu </button>
-        <button mat-button style="color: white;"> <mat-icon>home</mat-icon> Home </button>
-        <span class="space"></span>
-        <button mat-button style="color: white;"> <mat-icon>identifier</mat-icon> S'identifier </button>
-    </mat-toolbar-row>
+<mat-toolbar color="primary" class="toolbar-style">
+
+  <button (click)="toggleSidenav()" mat-icon-button class="example-icon"
+    aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a routerLink="/home" class="toolbar-link">
+    {{ title }} &nbsp;
+    <mat-icon class="align-middle"><!--home--></mat-icon>
+  </a>
+  <!--  <a class="toolbar-link">-->
+  <!--    Login &nbsp;-->
+  <!--    <mat-icon class="align-middle">link</mat-icon>-->
+  <!--  </a>-->
+  <mat-slide-toggle (click)="login()" color="primary">Login</mat-slide-toggle>
 </mat-toolbar>
-
 <mat-sidenav-container>
-    <mat-sidenav [(opened)]="opened" mode="side">
-        <mat-list>
-
-            <mat-list-item> <a routerLink="/liste-des-devoirs" class="alignement"
-                    style="text-decoration: none; "><mat-icon class="alignement">list</mat-icon>
-                    Liste des devoirs</a>
-            </mat-list-item>
-
-            <mat-list-item> <a routerLink="/ajout-devoir" class="alignement" style="text-decoration: none; "><mat-icon
-                        class="alignement">add_circle</mat-icon>
-                    Ajout d'un devoir</a>
-            </mat-list-item>
-
-            <mat-list-item> <a routerLink="/modification-devoir" class="alignement"
-                    style="text-decoration: none; "><mat-icon class="alignement">edit</mat-icon>
-                    Modification d'un devoir</a>
-            </mat-list-item>
-
-            <mat-list-item> <a routerLink="/suppression-devoir" class="alignement"
-                    style="text-decoration: none; "><mat-icon class="alignement">delete</mat-icon>
-                    Suppression d'un devoir</a>
-            </mat-list-item>
-
-            <mat-list-item> <a routerLink="/generation-donnees-test" class="alignement"
-                style="text-decoration: none; "><mat-icon class="alignement">poll</mat-icon>
-                Génération de données de test</a>
-        </mat-list-item>
-
-        </mat-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <router-outlet>
-
-        </router-outlet>
-
-
-    </mat-sidenav-content>
-
+  <mat-sidenav [(opened)]="opened" mode="side">
+    <mat-list>
+      <mat-list-item>
+        <mat-icon class="align-middle">list</mat-icon>&nbsp;Liste des devoirs
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon class="align-middle">add_circle</mat-icon>&nbsp;Ajout d'un devoir
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon class="align-middle">edit</mat-icon>&nbsp;Modification d'un devoir
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon class="align-middle">delete</mat-icon>&nbsp;Suppression d'un devoir
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon class="align-middle">poll</mat-icon>&nbsp;Génération de données de test
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="padding: 10px">
+      <!--      <app-assignments></app-assignments>-->
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>

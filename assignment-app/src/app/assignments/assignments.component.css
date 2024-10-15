@@ -1,16 +1,12 @@
-.rendu {
-   
-    color:green
+.container {
+  display: flex;
+  flex-direction: column;
 }
 
-.nonRendu {
-  
-    color:red
+.ajouterBtn {
+  align-self: flex-end;
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-  }
-
+.item-list-style {
+  text-decoration: none;
+}
