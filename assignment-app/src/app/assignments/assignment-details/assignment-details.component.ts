@@ -32,10 +32,15 @@ export class AssignmentDetailsComponent {
 
   assignmentTransmis !: Assignment ;
 
-  constructor(private assignmentService: AssignmentsService, private route: ActivatedRoute, private router : Router, private authService : AuthService) {}
+  constructor(private assignmentService: AssignmentsService, 
+              private route: ActivatedRoute, 
+              private router : Router,
+              private authService : AuthService) {}
 
   ngOnInit() {
-    this.getAssignment()
+    this.isAdmin()
+    this.getAssignment()  
+    this.isAdmin()
   }
 
 
@@ -77,7 +82,8 @@ export class AssignmentDetailsComponent {
   }
 
   isAdmin() : boolean {
-    return this.authService.loggedIn
+    console.log('this.authService.isAdmin',this.authService.isAdmin)
+    return this.authService.isAdmin;
   }
 
 }

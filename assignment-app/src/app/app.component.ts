@@ -9,15 +9,16 @@ import {MatList, MatListItem} from "@angular/material/list";
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import {AuthService} from "./shared/auth.service";
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AssignmentsComponent, MatButton, MatSidenav, MatSidenavContainer, MatSidenavContent, MatIcon, MatIconButton, MatToolbar, MatList, MatListItem, RouterLink, MatSlideToggle],
+  imports: [RouterOutlet, AssignmentsComponent, MatButton, MatSidenav, MatSidenavContainer, MatSidenavContent, MatIcon, MatIconButton, MatToolbar, MatList, MatListItem, RouterLink, MatSlideToggle, ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Application de gestion des devoirs à rendre (Assignments)';
+  title = 'Application de gestion des devoirs ';
   opened = false
 
   constructor(private authService: AuthService, private router : Router) {}

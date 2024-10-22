@@ -2,14 +2,13 @@ import {CanActivateFn, Router} from '@angular/router';
 import {AuthService} from "./auth.service";
 import {inject} from "@angular/core";
 
-export const authGuard: CanActivateFn = (route, state) => {
-
+export const adminGuard: CanActivateFn = (route, state) => {
   let authService = inject(AuthService);
 
   let router = inject(Router);
 
 
-  return authService.isConnected()
+  return authService.isAdminG()
     .then( authenticated => {
       if (authenticated) {
         console.log('Vous êtes un administrateur, navigation autorisée')
@@ -20,7 +19,4 @@ export const authGuard: CanActivateFn = (route, state) => {
         return false;
       }
     })
-
-
-
 };

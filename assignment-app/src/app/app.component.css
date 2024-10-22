@@ -9,7 +9,7 @@ mat-sidenav-container {
 
 mat-sidenav{
   width: 250px;
-  background-color: rgba(211, 214, 212, 0.823);
+  background-color:#e8e7e7;
 }
 
 /*.example-spacer {*/

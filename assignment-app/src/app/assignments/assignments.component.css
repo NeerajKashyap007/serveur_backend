@@ -5,6 +5,7 @@
 
 .ajouterBtn {
   align-self: flex-end;
+  background-color: rgb(42, 152, 199);
 }
 
 .item-list-style {

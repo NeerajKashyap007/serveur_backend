@@ -1,0 +1,32 @@
+<div class="container">
+    <mat-card class="carte_principale" fxFlex="50">
+        <mat-card-header>
+            <h1>Formulaire de connexion</h1>
+        </mat-card-header>
+        <mat-card-content >
+            <form class="enjoliver" (ngSubmit)="login(); formLogin.reset()" #formLogin>
+
+                <mat-form-field>                    
+                    <input 
+                    matInput 
+                    [(ngModel)]="username"
+                    placeholder="Username"
+                     name="username" />
+                     <mat-icon matPrefix>person</mat-icon>
+                </mat-form-field>
+                <mat-form-field>
+                    <input 
+                    matInput
+                    [(ngModel)]="password"
+                    placeholder="Password" 
+                    name="password" 
+                    type="password"/>
+                    <mat-icon matPrefix>lock</mat-icon>
+                </mat-form-field>
+                <button id="btn-login" mat-raised-button color="primary" type="submit" >Connexion </button>
+                       </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<!-- Si je logg "se connecter" doit dispatraite et afficher le nom de la personne connecter a sa place -->

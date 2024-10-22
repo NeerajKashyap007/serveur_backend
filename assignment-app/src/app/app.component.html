@@ -5,14 +5,24 @@
     <mat-icon>menu</mat-icon>
   </button>
   <a routerLink="/home" class="toolbar-link">
+    <mat-icon class="align-middle">home</mat-icon>
     {{ title }} &nbsp;
-    <mat-icon class="align-middle"><!--home--></mat-icon>
+   
   </a>
-  <!--  <a class="toolbar-link">-->
+
+
+  <a routerLink="/home" class="toolbar-link" routerLink="/login">
+    <mat-icon class="align-middle"></mat-icon>
+Se connecter 
+  </a>
+  
+   <!-- <a class="toolbar-link">-->
   <!--    Login &nbsp;-->
   <!--    <mat-icon class="align-middle">link</mat-icon>-->
-  <!--  </a>-->
-  <mat-slide-toggle (click)="login()" color="primary">Login</mat-slide-toggle>
+  <!--  </a> -->
+
+
+  <!-- <mat-slide-toggle (click)="login()" color="primary">Login</mat-slide-toggle> -->
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav [(opened)]="opened" mode="side">
@@ -36,7 +46,8 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div style="padding: 10px">
-      <!--      <app-assignments></app-assignments>-->
+
+            
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>

@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    
+
+}
+
+
+.carte_principale {
+    background-color: hsla(0, 1%, 67%, 0.521);
+
+  
+}
+
+.enjoliver {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+    padding: 20px
+
+}
+ .enjoliver mat-form-field{
+    width: 100%;
+ }
