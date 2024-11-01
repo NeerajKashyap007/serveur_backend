@@ -39,13 +39,16 @@ export class AddAssignmentComponent {
 
   onSubmit(event:any) {
     const newAssignment = new Assignment()
-
+    newAssignment.id =Math.floor(Math.random()*1000);
     newAssignment.dateDeRendu = this.dateDeRendu;
     newAssignment.nom = this.nomDevoir;
     newAssignment.rendu = false;
 
-    this.assignmentsService.addAssignment(newAssignment).subscribe( message => {
-      console.log(message)})
+    this.assignmentsService.addAssignment(newAssignment)
+    .subscribe( Reponse => {
+      console.log("Réponse du serveur:" + Reponse.message);
+      
+    })
   }
 
 }

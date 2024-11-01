@@ -50,8 +50,9 @@ export class EditAssignmentComponent {
     newAssignment.nom = this.nomDevoir;
     newAssignment.rendu = false;
 
-    this.assignmentsService.updateAssignment(newAssignment).subscribe( message => {
-      console.log(message);
+    this.assignmentsService.updateAssignment(newAssignment)
+    .subscribe( reponse => {
+      console.log("Réponse du serveur:" + reponse.message)
       this.router.navigate(['/home'])
     })
   }

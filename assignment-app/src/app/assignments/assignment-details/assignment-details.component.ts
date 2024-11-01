@@ -54,19 +54,21 @@ export class AssignmentDetailsComponent {
   onAssignmentRendu() {
     this.assignmentTransmis.rendu = true;
 
-    this.assignmentService.updateAssignment(this.assignmentTransmis).subscribe( message => {
-      console.log(message)
+    this.assignmentService.updateAssignment(this.assignmentTransmis).subscribe( reponse=> {
+      console.log("Réponse du serveur:" + reponse.message)
+      this.router.navigate(['/home'])
     })
-    this.router.navigate(['/home'])
+    
   }
 
   onDeleteAssignment(event:Assignment) {
-    this.assignmentService.deleteAssignment(event).subscribe(message => {
-      console.log(message)
+    this.assignmentService.deleteAssignment(event)
+    .subscribe(reponse => {
+      console.log("Réponse du serveur:" + reponse.message)
+      this.router.navigate(['/home'])
     })
-    // @ts-ignore
-    // this.assignmentTransmis = null;
-    this.router.navigate(['/home'])
+
+    
   }
 
   onClickEdit() {

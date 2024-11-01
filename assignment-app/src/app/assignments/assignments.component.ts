@@ -39,7 +39,7 @@ import {RouterLink} from "@angular/router";
   providers: [provideNativeDateAdapter()],
   templateUrl: './assignments.component.html',
   styleUrl: './assignments.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // je doit réetuder cette partie: changeDetection: ChangeDetectionStrategy.OnPush, 
 })
 export class AssignmentsComponent {
   title = 'assignment-app';
