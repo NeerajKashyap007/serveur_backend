@@ -1,32 +1,41 @@
 <main class="container">
-  <button class="ajouterBtn" mat-flat-button color="primary" routerLink="/add">
+  <button class="ajouterBtn" mat-flat-button color="accent" routerLink="/add">
     Ajouter assignment
   </button>
 
-  <mat-list>
+  <div class="list-item-content">
     @for (assignment of assignments; track assignment.nom) {
-      <nav>
+      <nav class="navigation-item">
         <a routerLink="/assignment/{{ assignment.id }}" class="item-list-style">
           <h3 mat-subheader>
             {{ assignment.dateDeRendu | date }}
           </h3>
-          <mat-list-item>
-            @if (assignment.rendu) {
-              <p appRendu>
-                Le devoir {{ assignment.nom }}, qui est à rendre pour le
-                {{ assignment.dateDeRendu | date:'dd/MM/YYYY' }} a été rendu
-              </p>
-            } @else {
-              <p appNonRendu>
-                Le devoir {{ assignment.nom }}, qui est à rendre pour le
-                {{ assignment.dateDeRendu | date:'short' }}, EST ENCORE A RENDRE !!!
-              </p>
-            }
-          </mat-list-item>
+          @if (assignment.rendu) {
+            <p appRendu>
+              Le devoir {{ assignment.nom }}, qui est à rendre pour le
+              {{ assignment.dateDeRendu | date:'dd/MM/YYYY' }} a été rendu
+            </p>
+          } @else {
+            <p appNonRendu>
+              Le devoir {{ assignment.nom }}, qui est à rendre pour le
+              {{ assignment.dateDeRendu | date:'short' }}, EST ENCORE A RENDRE !!!
+            </p>
+          }
         </a>
       </nav>
     }
-  </mat-list>
-
-<!--  <app-assignment-details [assignmentTransmis]="assignementSelectionne"></app-assignment-details>-->
+    <mat-paginator
+      class="demo-paginator"
+      (page)="handlePageEvent($event)"
+      [length]="totalDocs"
+      [pageSize]="totalPages"
+      [disabled]="false"
+      [showFirstLastButtons]="true"
+      [pageSizeOptions]="[5,10,20,30,50]"
+      [hidePageSize]="false"
+      [pageIndex]="page"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
 </main>

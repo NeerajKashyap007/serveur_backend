@@ -19,18 +19,18 @@
           color="primary"
           (click)="onClickEdit()"
           [disabled]="!isAdmin()"
-        > 
-        <mat-icon>edit</mat-icon > Edit
+        >
+          Edit
         </button>
 
         <button
           mat-flat-button
+          [disabled]="!isAdmin()"
           color="warn"
           class="deleteStyle"
           (click)="onDeleteAssignment(assignmentTransmis)"
-          [disabled]="!isAdmin()"
         >
-          <mat-icon>delete</mat-icon > Supprimer
+          <mat-icon>delete</mat-icon> Supprimer
         </button>
       </mat-card-actions>
     </mat-card-content>

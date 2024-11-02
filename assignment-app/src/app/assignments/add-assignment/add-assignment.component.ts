@@ -7,6 +7,7 @@ import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {AssignmentsService} from "../../shared/assignments.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -33,21 +34,25 @@ export class AddAssignmentComponent {
 
   dateDeRendu !: Date;
 
-  constructor(private assignmentsService: AssignmentsService) {
+  constructor(private assignmentsService: AssignmentsService, private router : Router) {
   }
 
 
   onSubmit(event:any) {
+    event.preventDefault()
+
+    if (!this.dateDeRendu || this.nomDevoir) return;
+
     const newAssignment = new Assignment()
-    newAssignment.id =Math.floor(Math.random()*1000);
+
+    newAssignment.id = Math.floor(Math.random()*1000);
     newAssignment.dateDeRendu = this.dateDeRendu;
     newAssignment.nom = this.nomDevoir;
     newAssignment.rendu = false;
 
-    this.assignmentsService.addAssignment(newAssignment)
-    .subscribe( Reponse => {
-      console.log("Réponse du serveur:" + Reponse.message);
-      
+    this.assignmentsService.addAssignment(newAssignment).subscribe( message => {
+      console.log(message)
+      this.router.navigate(['/home'])
     })
   }
 

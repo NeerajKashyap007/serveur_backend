@@ -29,6 +29,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class EditAssignmentComponent {
 
+  assignment: Assignment | undefined;
+
   nomDevoir : string = '';
 
   dateDeRendu !: Date;
@@ -41,20 +43,31 @@ export class EditAssignmentComponent {
     console.log(this.route.snapshot.queryParams);
     console.log('Fragment :')
     console.log(this.route.snapshot.fragment);
+    this.getComponent();
+  }
+
+  private getComponent() {
+    const id = +this.route.snapshot.params['id'];
+    this.assignmentsService.getAssignment(id)
+      .subscribe(assignment => {
+        this.assignment = assignment;
+      });
   }
 
   onSaveAssignment(event:any) {
-    const newAssignment = new Assignment()
+    event.preventDefault();
 
-    newAssignment.dateDeRendu = this.dateDeRendu;
-    newAssignment.nom = this.nomDevoir;
-    newAssignment.rendu = false;
+    if (!this.assignment) return;
+    if (this.nomDevoir == '' || this.dateDeRendu === undefined) return;
 
-    this.assignmentsService.updateAssignment(newAssignment)
-    .subscribe( reponse => {
-      console.log("Réponse du serveur:" + reponse.message)
-      this.router.navigate(['/home'])
-    })
+    this.assignment.nom = this.nomDevoir;
+    this.assignment.dateDeRendu = this.dateDeRendu;
+    this.assignmentsService
+      .updateAssignment(this.assignment)
+      .subscribe((message) => {
+        console.log(message);
+        this.router.navigate(['/home']);
+      });
   }
 
 }

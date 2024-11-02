@@ -1,15 +1,16 @@
 mat-toolbar {
-  background-color:rgba(90, 145, 184, 0.823);
+  background-color: rgba(16, 82, 126, 0.71);
   color: white;
 }
 
 mat-sidenav-container {
-  height: calc(100vh - 120px);
+  height: calc(100vh - 80px);
 }
 
 mat-sidenav{
   width: 250px;
-  background-color:#e8e7e7;
+  background-color: #e3c1ac;
+  ;
 }
 
 /*.example-spacer {*/
@@ -28,6 +29,7 @@ mat-sidenav{
 .toolbar-style {
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .toolbar-link {

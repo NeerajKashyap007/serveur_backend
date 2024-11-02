@@ -5,9 +5,22 @@
 
 .ajouterBtn {
   align-self: flex-end;
-  background-color: rgb(42, 152, 199);
 }
 
 .item-list-style {
   text-decoration: none;
+}
+
+.list-item-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation-item {
+  border-bottom: 1px solid silver;
+  cursor: pointer;
+}
+
+.navigation-item:hover {
+  box-shadow: darkblue 1px 1px 1px;
 }

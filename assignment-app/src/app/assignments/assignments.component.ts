@@ -14,6 +14,7 @@ import {AssignmentDetailsComponent} from "./assignment-details/assignment-detail
 import {AddAssignmentComponent} from "./add-assignment/add-assignment.component";
 import {AssignmentsService} from "../shared/assignments.service";
 import {RouterLink} from "@angular/router";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-assignments',
@@ -35,11 +36,11 @@ import {RouterLink} from "@angular/router";
     AssignmentDetailsComponent,
     AddAssignmentComponent,
     RouterLink,
+    MatPaginator,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './assignments.component.html',
   styleUrl: './assignments.component.css',
-  // je doit réetuder cette partie: changeDetection: ChangeDetectionStrategy.OnPush, 
 })
 export class AssignmentsComponent {
   title = 'assignment-app';
@@ -50,6 +51,16 @@ export class AssignmentsComponent {
 
   assignments!: Assignment[];
 
+  page ?: number = 1;
+  limit ?: number = 10;
+  totalDocs !: number;
+  totalPages !: number;
+  pagingCounter !: number;
+  hasPrevPage !: boolean;
+  hasNextPage !: boolean;
+  prevPage !: number;
+  nextPage !: number;
+
   constructor(private assignmentService: AssignmentsService) {
   }
 
@@ -58,7 +69,25 @@ export class AssignmentsComponent {
   }
 
   getAssignments() {
-    this.assignmentService.getAssignments().subscribe( assignments => this.assignments = assignments );
+    // this.assignmentService.getAssignments().subscribe( assignments => this.assignments = assignments );
+    this.assignmentService.getAssignmentsPaginated(this.page!, this.limit!).subscribe( (data : any) => {
+
+      this.assignments = data.docs
+
+      this.totalDocs = data.totalDocs;
+      this.totalPages = data.totalPages;
+      this.prevPage = data.prevPage;
+      this.nextPage = data.nextPage;
+      this.hasPrevPage = data.hasPrevPage;
+      this.hasNextPage = data.hasNextPage;
+
+    } );
+  }
+
+  handlePageEvent(e:any) {
+    console.log('handlePageEvent', e)
+    this.limit = e.pageSize
+    this.getAssignments();
   }
 
   assignmentClique(assignment:Assignment) {

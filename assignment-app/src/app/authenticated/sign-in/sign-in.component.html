@@ -1,0 +1,28 @@
+<div>
+  <form ngForm (submit)="signIn(); signInForm.reset()" #signInForm>
+    <h2>Connexion !</h2>
+    <mat-form-field>
+      <mat-label>Login</mat-label>
+      <input
+        matInput
+        name="username"
+        type="text"
+        [(ngModel)]="username"
+      />
+      <mat-icon matPrefix>person</mat-icon>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Mot de passe</mat-label>
+      <input
+        matInput
+        name="password"
+        type="password"
+        [(ngModel)]="password"
+      />
+      <mat-icon matPrefix>lock</mat-icon>
+    </mat-form-field>
+    <button mat-flat-button type="submit">
+      Se connecter
+    </button>
+  </form>
+</div>

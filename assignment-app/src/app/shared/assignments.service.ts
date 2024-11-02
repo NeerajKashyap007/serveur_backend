@@ -1,82 +1,87 @@
 import { Injectable } from '@angular/core';
 import {Assignment} from "../assignments/assignment.model";
-import { tap,map, Observable, of, catchError } from "rxjs";
+import {catchError, forkJoin, map, Observable, of, tap} from "rxjs";
 import {LoggingService} from "./logging.service";
-import { HttpClient } from '@angular/common/http';
-
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import fakeData from './data'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssignmentsService {
 
-  constructor(private loggingService: LoggingService, private http:HttpClient) { }
+  private HttpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
 
-  backendURL="http://localhost:8010/api/assignments";
+  backendURL = 'http://localhost:8010/api/assignments/';
 
-  assignments = [ ];
+  constructor(private loggingService: LoggingService, private http: HttpClient) { }
+
+  assignments : Assignment[] = [];
+
+  private handleError<T>(operation : any, result?: T) {
+    return (error:any) : Observable<T> =>  {
+      console.error(error)
+      console.log(operation + 'a échoué ' + error.message);
+
+      return of(result as T);
+    };
+  }
+
+  insertFakeIntoDB() : Observable<any> {
+    let callsDoneToAddAssignment : Observable<any>[] = []
+
+    fakeData.map(element => {
+      const newAssignment = new Assignment()
+      newAssignment.dateDeRendu = new Date(element.dateDeRendu);
+      newAssignment.id = element.id;
+      newAssignment.nom = element.nom;
+      callsDoneToAddAssignment.push(
+        this.addAssignment(newAssignment)
+      )
+    })
+
+    return forkJoin(callsDoneToAddAssignment)
+
+  }
+
+  getAssignmentsPaginated(page:number, limit:number) {
+    return this.http.get<Assignment[]>(`${this.backendURL}?page=${page}&limit=${limit}`)
+  }
 
   getAssignments(): Observable<Assignment[]> {
- return this.http.get<Assignment[]>(this.backendURL);
-    // return of(this.assignments);
+    return this.http.get<Assignment[]>(this.backendURL, this.HttpOptions)
   }
 
-  getAssignment(id: number): Observable<Assignment|undefined> {
-    // return of(this.assignments.find(a => a.id === id));
-    return this.http.get<Assignment>(`${this.backendURL}/${id}`)
-    .pipe(
-      map(a=>{ 
-      a.nom +="recu et transformer avec un pipe";
-      return a;
-    }),
-  
-      tap(_ => { 
-        console.log("tap: assignment avec id = " + id + " requete GET envoyée sur MongoDB cloud");
-      }),
-      // catchError(this.handleError<Assignment>('getAssignment(id=${id})'))
-      catchError(this.handleError<any>('### catchError: getAssignments by id avec id=' + id + "a echouer"))
-  );
-}
+  getAssignment(id: number): Observable<Assignment> {
 
-private handleError<T>(operation: any, result?: T) {
-  return (error: any): Observable<T> => {
-    console.log(error); // pour afficher dans la console
-    console.log(operation + ' a échoué ' + error.message);
-
-    return of(result as T);
+    return this.http.get<Assignment>(this.backendURL + id)
+      .pipe(
+        map(a => {
+          a.nom += '...'
+          return a
+        }),
+        tap(_ => {
+          console.log('tap : getAssignment', id)
+        }),
+        catchError(this.handleError<any>('### catchError : getAssignments by id avec id=' + id))
+      )
   }
-};
+
 
   addAssignment(assignment: Assignment) : Observable<any> {
-    this.loggingService.log(assignment.nom, 'ajouté')
-    return this.http.post<Assignment>(this.backendURL, assignment);
+    return this.http.post(this.backendURL, assignment, this.HttpOptions)
   }
 
   updateAssignment(assignment: Assignment) : Observable<any> {
-       return this.http.put<Assignment>(this.backendURL, assignment);
+    return this.http.put(this.backendURL, assignment, this.HttpOptions)
   }
 
   deleteAssignment(assignment: Assignment) : Observable<any> {
-    this.loggingService.log(assignment.nom, 'supprimé')
-    return this.http.delete(this.backendURL + "/" + assignment._id);
+    let deleteURI = this.backendURL + '/' + assignment._id;
+    return this.http.delete(deleteURI, this.HttpOptions)
   }
-
-  // addAssignment(assignment: Assignment) : Observable<string> {
-  //   this.assignments.push(assignment);
-  //   // return of(this.assignments);
-  //   this.loggingService.log(assignment.nom, 'ajouté')
-  //   return of('Assignment ajouté');
-  // }
-
-  // updateAssignment(assignment: Assignment) : Observable<string> {
-  //   // this.assignments.splice(this.assignments.indexOf(assignment), 1);
-
-  //   return of('Assignment updated !!!')
-  // }
-
-  // deleteAssignment(assignment: Assignment) : Observable<string> {
-  //   this.assignments.splice(this.assignments.indexOf(assignment), 1);
-
-  //   return of('Assignment deleted!!!')
-  // }
 }

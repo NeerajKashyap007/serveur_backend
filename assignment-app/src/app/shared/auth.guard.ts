@@ -1,6 +1,7 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {AuthService} from "./auth.service";
 import {inject} from "@angular/core";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 export const authGuard: CanActivateFn = (route, state) => {
 
@@ -8,19 +9,19 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   let router = inject(Router);
 
+  let snackbar = inject(MatSnackBar)
 
-  return authService.isConnected()
+  return authService.isLogged()
     .then( authenticated => {
       if (authenticated) {
-        console.log('Vous êtes un administrateur, navigation autorisée')
         return true;
       } else {
-        console.log('Vous n\'êtes pas un administrateur, navigation refusée')
+        snackbar.open("Veuillez vous connecter d'abord !", 'Fermer', {
+
+        })
         router.navigate(['/home']);
         return false;
       }
     })
-
-
 
 };

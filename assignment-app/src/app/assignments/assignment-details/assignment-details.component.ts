@@ -32,15 +32,10 @@ export class AssignmentDetailsComponent {
 
   assignmentTransmis !: Assignment ;
 
-  constructor(private assignmentService: AssignmentsService, 
-              private route: ActivatedRoute, 
-              private router : Router,
-              private authService : AuthService) {}
+  constructor(private assignmentService: AssignmentsService, private route: ActivatedRoute, private router : Router, private authService : AuthService) {}
 
   ngOnInit() {
-    this.isAdmin()
-    this.getAssignment()  
-    this.isAdmin()
+    this.getAssignment()
   }
 
 
@@ -54,21 +49,17 @@ export class AssignmentDetailsComponent {
   onAssignmentRendu() {
     this.assignmentTransmis.rendu = true;
 
-    this.assignmentService.updateAssignment(this.assignmentTransmis).subscribe( reponse=> {
-      console.log("Réponse du serveur:" + reponse.message)
+    this.assignmentService.updateAssignment(this.assignmentTransmis).subscribe( message => {
+      console.log(message)
       this.router.navigate(['/home'])
     })
-    
   }
 
   onDeleteAssignment(event:Assignment) {
-    this.assignmentService.deleteAssignment(event)
-    .subscribe(reponse => {
-      console.log("Réponse du serveur:" + reponse.message)
+    this.assignmentService.deleteAssignment(event).subscribe(message => {
+      console.log(message)
       this.router.navigate(['/home'])
     })
-
-    
   }
 
   onClickEdit() {
@@ -84,8 +75,7 @@ export class AssignmentDetailsComponent {
   }
 
   isAdmin() : boolean {
-    console.log('this.authService.isAdmin',this.authService.isAdmin)
-    return this.authService.isAdmin;
+    return this.authService.loggedAsAdmin
   }
 
 }
