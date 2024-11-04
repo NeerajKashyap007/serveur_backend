@@ -43,11 +43,3 @@ Une étiquette TPXX doit être ajoutée à la fin de chaque séance de TP pour v
 git tag NomEtiquette
 git push --tags
 ```
-
-
-
-
-
-
-
-

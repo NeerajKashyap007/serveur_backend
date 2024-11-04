@@ -21,7 +21,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class AppComponent {
   title = 'Application de gestion des devoirs';
 
-  opened = true
+  opened = false
 
   private _snackBar = inject(MatSnackBar);
 
