@@ -1,0 +1,29 @@
+Assignment API
+This project is a backend service built with Node.js and Express.js, connecting to a MongoDB cloud database.
+It provides an API for managing assignments, including CRUD (Create, Read, Update, Delete) operations.
+
+Features
+GET /api/assignments: Retrieve all assignments
+GET /api/assignments/:id: Retrieve a single assignment by ID
+POST /api/assignments: Create a new assignment
+PUT /api/assignments: Update an existing assignment
+DELETE /api/assignments/:id: Delete an assignment by ID
+
+Prerequisites
+Node.js (version 12 or later)
+MongoDB Atlas account for cloud-based database setup
+NPM package manager (usually comes with Node.js)
+
+Run the server
+npm start
+
+Verify
+http://localhost:8010/api/assignments
+
+API Endpoints
+Method	      Endpoint	                Description
+GET	      /api/assignments	        Fetch all assignments
+GET	     /api/assignments/:id     	Fetch a specific assignment by ID
+POST	   /api/assignments	          Create a new assignment
+PUT	    /api/assignments    	      Update an existing assignment
+DELETE	/api/assignments/:id	      Delete an assignment by ID
